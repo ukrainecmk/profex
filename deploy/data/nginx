@@ -1,0 +1,54 @@
+server {
+        listen 80;
+
+        # Make site accessible from http://localhost/
+        server_name localhost;
+
+        error_log /var/log/nginx/localhost.error.log crit;
+        #access_log /var/log/nginx/localhost.access.log;
+
+        location /favicon.ico {
+            root   /var/www/htdocs;
+            expires     max;
+        }
+        location /favicon2.ico {
+            root   /var/www/htdocs;
+            expires max;
+        }
+        location / {
+            proxy_pass http://127.0.0.1:8080;
+        }
+
+        location /storage {
+            root /data;
+            expires max;
+        }
+
+        location /img {
+            root   /var/www/htdocs;
+            expires     max;
+        }
+        location /files {
+            root   /var/www/htdocs;
+            expires     max;
+        }
+        location /js {
+            root   /var/www/htdocs;
+            expires     max;
+        }
+        location /css {
+            root /var/www/htdocs;
+            expires max;
+        }
+        location /plugins {
+            root /var/www/htdocs;
+        }
+
+        location ~* /mobile/(.*).html {
+            proxy_pass http://127.0.0.1:8080/conference/mobile/index.php?file=$1;
+        }
+
+        location ~* ^/conference/(.*).html {
+            proxy_pass http://127.0.0.1:8080/conference/index.php?file=$1;
+        }
+}

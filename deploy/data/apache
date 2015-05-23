@@ -1,0 +1,14 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@webchallenge
+    DocumentRoot /var/www/
+    Options FollowSymlinks
+    <Directory />
+        AllowOverride All
+        DirectoryIndex index.php index.html
+    </Directory>
+
+    ServerName localhost
+
+    ErrorLog "/var/log/apache2/localhost-error.log"
+    CustomLog "/var/log/apache2/localhost-access.log" common
+</VirtualHost>
